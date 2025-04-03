@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/bunyan": "^1.8.11",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/express-fileupload": "^1.5.1",
@@ -22,7 +23,9 @@
   },
   "dependencies": {
     "@botpress/client": "^0.48.3",
+    "@sentry/node": "^9.11.0",
     "axios": "^1.8.4",
+    "bunyan": "^1.8.15",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express-fileupload": "^1.5.1"

@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { BaseCustomError } from "./BaseCustomError";
+import bunyan from "bunyan";
+import * as Sentry from "@sentry/node";
+
+const log = bunyan.createLogger({ name: "chat-with-pdf" });
 
 export default (
   error: unknown,
@@ -11,6 +15,7 @@ export default (
     next(error);
   }
 
+  logError(error, req);
   res.status(getErrorCode(error)).json({ message: getErrorMessage(error) });
 };
 
@@ -34,4 +39,13 @@ const getErrorCode = (error: unknown) => {
     return Number(error.statusCode);
   }
   return 500;
+};
+
+const logError = (error: any, req: Request) => {
+  log.error("Time:", Date.now());
+  log.error("Request Type:", req.method);
+  log.error("Request URL:", req.originalUrl);
+  log.error("Message:", error.message);
+
+  Sentry.captureException(error);
 };

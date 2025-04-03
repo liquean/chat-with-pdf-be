@@ -15,7 +15,7 @@ export const askFile = async (query: string) => {
 
     // Send request to OpenRouter to get the answers from selected LLM
     const { data } = await chatCompletion(
-      buildPromptWithContext("query", condensedPassages)
+      buildPromptWithContext(query, condensedPassages)
     );
 
     const messages =
